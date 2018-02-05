@@ -11,3 +11,12 @@ class SparseDataTensor(object):
     def to_value(self, sess: tf.Session):
         H, M, gs = sess.run([self.H, self.M, self.ground_state])
         return SparseDataValue(H=H, M=M, dense_shape=self.dense_shape, ground_state=gs)
+
+    def apply_relu(self):
+        """Returns a new SparseDataTensor object with relu applied to M and ground_state"""
+        return SparseDataTensor(
+            self.H,
+            tf.nn.relu(self.M),
+            self.dense_shape,
+            tf.nn.relu(self.ground_state)
+        )
