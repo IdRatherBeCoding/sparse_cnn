@@ -46,7 +46,7 @@ def build_h_out_and_Q(H_in, M_in, dense_shape, f, n_in, ground_state):
     width = dense_shape[1]
 
     output_sites = {}
-    # enumerate all output active sites and store the row numbers in H_out and Q
+    # enumerate all output active sites and store the positions
     i_out = 0
     for [row, col] in H_in:
         for i, j in filter_positions(row, col, height, width, f):
@@ -69,8 +69,6 @@ def build_h_out_and_Q(H_in, M_in, dense_shape, f, n_in, ground_state):
             h_out[i_out, 0] = i
             h_out[i_out, 1] = j
             for i_val, value in enumerate(values):
-                # todo: we should be able to reshape q and assign values to a slice.
-                # q could be reshaped back to a_out x f*f*n_in at the end.
                 q[i_out, position_in_filter(i, j, row, col, f, i_val, n_in)] = value
 
     return (h_out, q)
@@ -86,7 +84,7 @@ def next_ground_state(W, gs_in, f):
 
 
 def sparse_conv_2d(sparse_input, W, f, n_out, b):
-    # b should just be 1-D tensor of weights, length n_out
+    # b should just be 1-D tensor of biases, length n_out
 
     H_in = sparse_input.H
     M_in = sparse_input.M
