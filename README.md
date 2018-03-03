@@ -6,3 +6,5 @@ Link: [Forward prop](https://github.com/IdRatherBeCoding/sparse_cnn/blob/master/
 This notebook gives an introduction to forward propagation with sparse convolutions, and a toy application.
 
 Link: [Backward propagation](https://github.com/IdRatherBeCoding/sparse_cnn/blob/master/sparse_cnn_back_prop.ipynb)
+
+An implementation of the gradient for the custom *py_func* used in the sparse CNN implementation.
